@@ -1,5 +1,12 @@
 package com.example.main.controller;
 
+import com.example.main.service.ApiCall;
+import com.example.main.model.JsonResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,28 +17,27 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/")
 public class MainController {
+    protected Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    ApiCall apiCall;
+
     @RequestMapping(value = "/api1", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity<JsonResponse> api1() {
-        return new ResponseEntity<JsonResponse>(new JsonResponse("api1"), HttpStatus.OK);
+        return apiCall.callApi1();
     }
 
-    class JsonResponse {
-        private String key;
+    @RequestMapping(value = "/api2", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity<JsonResponse> api2() {
+        return apiCall.callApi2();
+    }
 
-        public JsonResponse() {}
-
-        public JsonResponse(String key) {
-            this.key = key;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
+    @RequestMapping(value = "/api3", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity<JsonResponse> api3() {
+        return apiCall.callApi3();
     }
 
 }
