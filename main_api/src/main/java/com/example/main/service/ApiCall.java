@@ -22,7 +22,7 @@ public class ApiCall {
     @HystrixCommand(fallbackMethod = "fallback")
     public ResponseEntity<JsonResponse> callApi2() {
         RestTemplate restTemplate = new RestTemplate();
-        String responseString = restTemplate.getForObject("http://localhost:8081/api2", String.class);
+        String responseString = restTemplate.getForObject("http://localhost:8082/api2", String.class);
 
         return new ResponseEntity<JsonResponse>(new JsonResponse(responseString), HttpStatus.OK);
     }
@@ -30,7 +30,7 @@ public class ApiCall {
     @HystrixCommand(fallbackMethod = "fallback")
     public ResponseEntity<JsonResponse> callApi3() {
         RestTemplate restTemplate = new RestTemplate();
-        String responseString = restTemplate.getForObject("http://localhost:8081/api3", String.class);
+        String responseString = restTemplate.getForObject("http://localhost:8083/api3", String.class);
 
         return new ResponseEntity<JsonResponse>(new JsonResponse(responseString), HttpStatus.OK);
     }
